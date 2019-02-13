@@ -13,7 +13,7 @@ class SearchResults extends Component{
       //variables for storing api string
       var url= "http://api.yummly.com/v1/api/recipes?_app_id=a18fce64&_app_key=a14d935b77f1742265befa9527b9232e&requirePictures=true&q=";
       var queryString = this.props.query;
-
+      var that = this;  // old school hack from Sean.  Blame him.
       fetch(url + queryString)
         .then(function(response) {
           //turn response into a JSON object
@@ -30,8 +30,9 @@ class SearchResults extends Component{
               id : myJson.matches[i].id,
               image : myJson.matches[i].imageUrlsBySize[90]
             });
-            this.setState({responseArray: responseObjects});
-        }
+          }
+          console.log(this);
+          that.setState({responseArray: responseObjects});
       })
       .catch(error => console.error(error));
     }
