@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from "react-router-dom";
+import { Redirect } from 'react-router-dom';
+import {browserHistory} from "react-router";
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SearchResults from './components/search/SearchResults';
@@ -13,8 +15,8 @@ class App extends Component {
 
   //exists for the lifetime of the app, is static until updated with setState
   state={
-      "mealList":[
-      ]
+        "mealList":[],
+        "search" : "",
   }
 
   //method to delete a pizza object from the state using the index from our menu list
@@ -28,6 +30,18 @@ class App extends Component {
     this.setState({mealList:arr})
   }
 
+  searchChange = e => {
+    this.setState({search: e.target.value})
+  }
+
+  searchSubmit = (e,{ title, history }) => {
+    e.preventDefault();
+
+    if(this.state.search && this.state.search != ""){
+      history.push('/my-new-location')
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -36,14 +50,15 @@ class App extends Component {
           <Header title="Meal Planner" />
           <section>
             <Route exact path = "/"
-            component={Searchbox}/>
-
-            <Route exact path = "/search"
             render={(routeProps) => (
-              <SearchResults {...routeProps} query="pizza" onItemDelete={(i) =>this.deleteItemAt(i)} />
+              <Searchbox {...routeProps} searchChange={() => this.searchChange()} searchSubmit={() => this.searchSubmit()} />
             )} />
 
-            <Route exact path = "/detail"
+          <Route exact path = "/search/:query"
+            component={SearchResults}/>
+
+
+          <Route exact path = "/recipe/:recipeID"
             component={RecipeDetail}/>
 
 

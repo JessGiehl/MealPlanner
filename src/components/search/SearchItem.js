@@ -6,7 +6,7 @@ const SearchItem = (props) => {
         <li>
           <img src={props.item.image}></img>
           <b>{props.item.name}</b>
-          <a href="./search/">Recipe Details</a>
+          <a href={"../recipe/"+ props.item.id}>Recipe Details</a>
         </li>
     )
 }

@@ -10,10 +10,11 @@ class SearchResults extends Component{
 
     //Make a API call when the component mounts
     componentDidMount() {
+      let that = this;
       //variables for storing api string
       var url= "http://api.yummly.com/v1/api/recipes?_app_id=a18fce64&_app_key=a14d935b77f1742265befa9527b9232e&requirePictures=true&q=";
       var queryString = this.props.query;
-      var that = this;  // old school hack from Sean.  Blame him.
+
       fetch(url + queryString)
         .then(function(response) {
           //turn response into a JSON object
@@ -30,9 +31,8 @@ class SearchResults extends Component{
               id : myJson.matches[i].id,
               image : myJson.matches[i].imageUrlsBySize[90]
             });
-          }
-          console.log(this);
-          that.setState({responseArray: responseObjects});
+        }
+        that.setState({responseArray: responseObjects});
       })
       .catch(error => console.error(error));
     }
@@ -41,8 +41,8 @@ class SearchResults extends Component{
     //method that maps through our menu prop and uses the values to create list items
     generateList(){
         let ret = this.state.responseArray.map((e,i)=>{
-            console.log(e);
-            return <SearchItem key={i} item={e} />
+          console.log(e);
+          return <SearchItem key={i} item={e} />
         })
 
         return ret;
