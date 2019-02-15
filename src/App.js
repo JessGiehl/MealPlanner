@@ -16,7 +16,6 @@ class App extends Component {
   //exists for the lifetime of the app, is static until updated with setState
   state={
         "mealList":[],
-        "search" : "",
   }
 
   //method to delete a pizza object from the state using the index from our menu list
@@ -30,17 +29,6 @@ class App extends Component {
     this.setState({mealList:arr})
   }
 
-  searchChange = e => {
-    this.setState({search: e.target.value})
-  }
-
-  searchSubmit = (e,{ title, history }) => {
-    e.preventDefault();
-
-    if(this.state.search && this.state.search != ""){
-      history.push('/my-new-location')
-    }
-  }
 
   render() {
     return (
