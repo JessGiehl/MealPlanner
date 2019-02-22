@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "16fe17565a56a832c035",
+    "revision": "a2e9649f8c3461616a9b",
     "url": "/MealPlanner/static/css/main.f69474d0.chunk.css"
   },
   {
-    "revision": "16fe17565a56a832c035",
-    "url": "/MealPlanner/static/js/main.16fe1756.chunk.js"
+    "revision": "a2e9649f8c3461616a9b",
+    "url": "/MealPlanner/static/js/main.a2e9649f.chunk.js"
   },
   {
     "revision": "ab97fdb86317a8a7288e",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/MealPlanner/static/js/runtime~main.7016db36.js"
   },
   {
-    "revision": "625bdddd812d1d8d8a631e133fc12c6c",
+    "revision": "96ce0c31f956a2b7f7664dd1ee9477cd",
     "url": "/MealPlanner/index.html"
   }
 ];
