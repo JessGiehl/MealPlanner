@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import {withRouter} from "react-router-dom";
+import {Form, FormControl, Button} from 'react-bootstrap'
+
 
 class Searchbox extends Component {
 
@@ -6,19 +9,27 @@ class Searchbox extends Component {
     "query" : ""
   };
 
+  //when value of searchbox changes, set the state to the new value
   handleChange = e => {
     this.setState({"query": e.target.value})
   };
 
+  //when the form is submitted prevent the page from reloading and then use the props.history
+  searchSubmit = e => {
+    e.preventDefault();
+    console.log(this);
+    this.props.history.push("/search/"+this.state.query);
+  }
 
+  //create our searchbox which has a method for capturing the value and a method that runs on submit
   render() {
     return (
-      <form>
-        <input type="text" value={this.state.query} onChange={this.handleChange} />
-        <button onClick={(e)=>{e.preventDefault();this.props.history.push("/search/"+this.state.query)}}>Search</button>
-      </form>
+      <Form inline onSubmit={this.searchSubmit}>
+        <FormControl type="text" placeholder="Search for recipes" className="mr-sm-2" value={this.state.query} onChange={this.handleChange}/>
+        <Button variant="outline-success" onClick={this.searchSubmit}>Search</Button>
+      </Form>
     )
   }
 }
 
-export default Searchbox
+export default withRouter(Searchbox);

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from "react-router-dom";
-import { Redirect } from 'react-router-dom';
-import {browserHistory} from "react-router";
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SearchResults from './components/search/SearchResults';
@@ -15,7 +13,12 @@ class App extends Component {
 
   //exists for the lifetime of the app, is static until updated with setState
   state={
-        "mealList":[],
+        "menus":[
+          {
+            name : "default",
+            recipes : []
+          }
+        ],
   }
 
   //method to delete a pizza object from the state using the index from our menu list
@@ -29,29 +32,32 @@ class App extends Component {
     this.setState({mealList:arr})
   }
 
+  addItem(recipe){
+    //data binding
+    let menuArray = [...this.state.menus]
+    let defaultMenu = menuArray[0];
+    //push the recipe object to our newly created array
+    defaultMenu.recipes.push(recipe);
+    this.setState({menus: menuArray})
+    localStorage.setItem('menuStorage', JSON.stringify(menuArray));
+  }
 
+  //renders the header, searchbox, and the footer. The main body of the page is dictated by the URL,
+  //search/ and recipe/ both pass paramaters into their route components
   render() {
     return (
       <Router>
         <div className="App">
           {/* import the header component, pass a title as a prop */}
-          <Header title="Meal Planner" />
+          <Header/>
           <section>
-            <Route exact path = "/"
-            render={(routeProps) => (
-              <Searchbox {...routeProps} searchChange={() => this.searchChange()} searchSubmit={() => this.searchSubmit()} />
-            )} />
-
           <Route exact path = "/search/:query"
             component={SearchResults}/>
-
-
           <Route exact path = "/recipe/:recipeID"
-            component={RecipeDetail}/>
-
-
+            render={(routeProps) => (
+              <RecipeDetail {...routeProps} addItem={(recipe) =>this.addItem(recipe)} />
+            )} />
           </section>
-
           <Footer />
         </div>
       </Router>

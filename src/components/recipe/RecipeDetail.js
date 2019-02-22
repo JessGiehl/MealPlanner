@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import Ingredient from './Ingredient';
+import Flavorchart from './FlavorChart';
 
 class RecipeDetail extends Component{
 
@@ -30,10 +31,14 @@ class RecipeDetail extends Component{
           "image" : myJson.images[0].hostedLargeUrl,
           "servings" : myJson.numberOfServings,
           "ingredients" : [],
+          "flavors" : [],
           "externalURL" : myJson.source.sourceRecipeUrl
         }
         for (var i = 0; i < myJson.ingredientLines.length; i++) {
           recipe.ingredients.push(myJson.ingredientLines[i]);
+        }
+        for (var i = 0; i < myJson.flavors.length; i++) {
+          recipe.flavors.push(myJson.flavors[i]);
         }
         console.log(recipe);
         that.setState({"recipe":recipe});
@@ -42,6 +47,7 @@ class RecipeDetail extends Component{
     .catch(error => console.error(error));
   }
 
+  //loop through our ingredients in the state and return an ingredient component for each one
   generateList(){
       let ret = this.state.recipe.ingredients.map((e,i)=>{
         return <Ingredient name={e} />
@@ -50,17 +56,20 @@ class RecipeDetail extends Component{
       return ret;
   }
 
+    //render out the recipe details using the values we set in the state
     render(){
         return(
           <section>
-          <h2>{this.state.recipe.name}</h2>
-          <img src={this.state.recipe.image}></img>
-          <p>Number of servings: {this.state.recipe.servings} </p>
-          <a href={this.state.recipe.externalURL}>Recipe Source</a>
-          <p>Ingredients:</p>
-          <ul>
-            {this.generateList()}
-          </ul>
+            <h2>{this.state.recipe.name}</h2>
+            <img src={this.state.recipe.image} alt={this.state.recipe.name}></img>
+            <p>Number of servings: {this.state.recipe.servings} </p>
+            <a href={this.state.recipe.externalURL}>Recipe Source</a>
+            <p>Ingredients:</p>
+            <ul>
+              {this.generateList()}
+            </ul>
+            <Flavorchart flavors={this.state.recipe.flavors}/>
+            <button onClick={() => this.props.addItem(this.state.recipe)}>Add to Menu</button>
           </section>
         )
     }
