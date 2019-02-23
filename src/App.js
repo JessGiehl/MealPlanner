@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import SearchResults from './components/search/SearchResults';
 import RecipeDetail from './components/recipe/RecipeDetail';
 import Searchbox from './components/search/Searchbox';
-//import MealList from './components/planner/MealList';
+import MealList from './components/menu/MealList';
 
 //import './App.css';
 
@@ -48,7 +48,6 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          {/* import the header component, pass a title as a prop */}
           <Header/>
           <section>
           <Route exact path = "/search/:query"
@@ -56,6 +55,10 @@ class App extends Component {
           <Route exact path = "/recipe/:recipeID"
             render={(routeProps) => (
               <RecipeDetail {...routeProps} addItem={(recipe) =>this.addItem(recipe)} />
+            )} />
+          <Route exact path = "/menu"
+            render={(routeProps) => (
+              <MealList {...routeProps} menu={this.state.menus} deleteItem={(i) =>this.deleteItemAt(i)} />
             )} />
           </section>
           <Footer />

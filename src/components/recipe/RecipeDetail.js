@@ -14,7 +14,7 @@ class RecipeDetail extends Component{
   componentDidMount() {
     var that = this;
     //variables for storing api string
-    var urlStart = "http://api.yummly.com/v1/api/recipe/"
+    var urlStart = "https://api.yummly.com/v1/api/recipe/"
     const {recipeID} = this.props.match.params
     var urlEnd = "?_app_id=a18fce64&_app_key=a14d935b77f1742265befa9527b9232e";
     console.log(recipeID);
@@ -28,6 +28,7 @@ class RecipeDetail extends Component{
         console.log(myJson);
         var recipe = {
           "name" : myJson.name,
+          "id" : recipeID,
           "image" : myJson.images[0].hostedLargeUrl,
           "servings" : myJson.numberOfServings,
           "ingredients" : [],

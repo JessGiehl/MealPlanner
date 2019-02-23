@@ -12,9 +12,10 @@ class SearchResults extends Component{
     componentDidMount() {
       let that = this;
       //variables for storing api string
-      var url= "http://api.yummly.com/v1/api/recipes?_app_id=a18fce64&_app_key=a14d935b77f1742265befa9527b9232e&requirePictures=true&q=";
+      var url= "https://api.yummly.com/v1/api/recipes?_app_id=a18fce64&_app_key=a14d935b77f1742265befa9527b9232e&requirePictures=true&q=";
       //use the prop parameters to get the search query string from the URL
       var {query} = this.props.match.params;
+      this.setState({"searchQuery" : query})
 
       fetch(url + query)
         .then(function(response) {
@@ -59,7 +60,7 @@ class SearchResults extends Component{
     render(){
         return(
             <section>
-              <h3>Search results for {this.props.query}:</h3>
+              <h3>Search results for {this.state.searchQuery}:</h3>
               {/* call the generateList function and output it in an unordered list */}
               <ul>{this.generateList()}</ul>
             </section>
