@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
-import SearchItem from './SearchItem';
+import Searchbox from './search/Searchbox';
+import SearchItem from './search/SearchItem';
 
-class SearchResults extends Component{
+class HomePage extends Component{
 
     state = {
         "responseArray" : [
@@ -37,9 +38,8 @@ class SearchResults extends Component{
         }
         //set the state with our array of responseObjects
         that.setState({responseArray: responseObjects});
-        that.setState({error: "false"})
       })
-      .catch(error => that.setState({error: "true"}));
+      .catch(error => console.error(error));
     }
 
     componentDidUpdate(prevProps){
@@ -50,23 +50,22 @@ class SearchResults extends Component{
 
     //method that maps through our menu prop and uses the values to create list items
     generateList(){
-        if (this.state.error == "true") {
-          return "Error, something went wrong.";
-        } else if (this.state.error != false && this.state.responseArray.length == 0){
-          return "No search results were found.";
-        } else {
-          let ret = this.state.responseArray.map((e,i)=>{
-            //console.log(e);
-            return <SearchItem key={i} item={e} />
-          })
-          return ret;
-        }      
+        let ret = this.state.responseArray.map((e,i)=>{
+          //console.log(e);
+          return <SearchItem key={i} item={e} />
+        })
+
+        return ret;
     }
 
     render(){
         return(
             <section>
-              <h3>Search results for {this.state.searchQuery}:</h3>
+              <h2>Find Recipes</h2>
+              <h2>Plan Meals</h2>
+              <h2>Create Shopping Lists</h2>
+              <Searchbox />
+              <h5>or get started with these top rated recipes!</h5>
               {/* call the generateList function and output it in an unordered list */}
               <ul>{this.generateList()}</ul>
             </section>
@@ -75,4 +74,4 @@ class SearchResults extends Component{
 
 }
 
-export default SearchResults
+export default HomePage

@@ -1,12 +1,15 @@
-## Portfolio 5 React Lecture Demo
+## Meal Planner
 
 ![preview image](images/preview.png)<br>
-This is an educational project demonstrating some of the functionality found in React in the context of a CRUD application.
+Meal Planner is a web application built using React. You can use it to search for recipes and create menus with shopping lists.
+
+### Planned Features (not yet implemented)
+
+* Seperate view for printing shopping lists
+* Pagination for search results
+* Chart for flavors
 
 ### `npm start`
 
-Runs the app in the development mode.<br>
+Runs the application in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.

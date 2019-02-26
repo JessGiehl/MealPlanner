@@ -40,6 +40,7 @@ class RecipeDetail extends Component{
         }
         for (var i = 0; i < myJson.flavors.length; i++) {
           recipe.flavors.push(myJson.flavors[i]);
+          console.log(myJson.flavors[i]);
         }
         console.log(recipe);
         that.setState({"recipe":recipe});
