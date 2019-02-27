@@ -5,6 +5,7 @@ import Ingredient from '../recipe/Ingredient'
 
 class MealList extends Component {
 
+  //loop through the recipe array passed down through props and create a mealItem for each element
   createMenuList(){
     let menuArray = this.props.menu[0].recipes;
     let ret = menuArray.map((e,i)=>{
@@ -14,6 +15,8 @@ class MealList extends Component {
     return ret;
   }
 
+  //loop through the recipe array passed down through props and then the nested ingredient array for every element
+  //create an ingredient component for each one
   createIngredientList(){
     let menuArray = this.props.menu[0].recipes;
     let tmp = [];

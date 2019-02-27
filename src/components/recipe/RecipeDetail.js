@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import Ingredient from './Ingredient';
-import Flavorchart from './FlavorChart';
 
 class RecipeDetail extends Component{
 
@@ -24,6 +23,7 @@ class RecipeDetail extends Component{
         //turn response into a JSON object
         return response.json();
       })
+      //create a recipe object containing two arrays, one for ingredients and one for flavors and push it to the state
       .then(function(myJson) {
         console.log(myJson);
         var recipe = {
@@ -59,6 +59,7 @@ class RecipeDetail extends Component{
   }
 
     //render out the recipe details using the values we set in the state
+    //use the method we passed down through props to call app.js' addItem method
     render(){
         return(
           <section>

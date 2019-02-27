@@ -42,6 +42,7 @@ class SearchResults extends Component{
       .catch(error => that.setState({error: "true"}));
     }
 
+    //when the query changes if it does not match the current query value, run the componentDidMount method for a new API call
     componentDidUpdate(prevProps){
       if (this.props.match.params !== prevProps.match.params){
         this.componentDidMount();
@@ -60,7 +61,7 @@ class SearchResults extends Component{
             return <SearchItem key={i} item={e} />
           })
           return ret;
-        }      
+        }
     }
 
     render(){

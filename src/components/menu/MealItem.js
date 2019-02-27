@@ -4,7 +4,7 @@ import {Button} from 'react-bootstrap'
 
 const MealItem = (props) => {
     return(
-      //from the props item, display the name and price propery
+      //use the props to pass down the properties or each element and a reference to the app.js method for deletion in the button
         <li>
           <img src={props.item.image} alt={props.item.name}></img>
           <h5>{props.item.name}</h5>
