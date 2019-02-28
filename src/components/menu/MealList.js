@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Button} from 'react-bootstrap'
 import MealItem from './MealItem'
 import Ingredient from '../recipe/Ingredient'
 
@@ -31,15 +30,32 @@ class MealList extends Component {
 
 
   render() {
+    //if there are no recipes added to the menu, display a message prompting the user to search for recipes.
+    let display;
+    if (this.props.menu[0].recipes == 0){
+      display = <div class="mb-20">
+                  <h5>Search for recipes and add them to your menu and they will appear here!</h5>
+                </div>
+    } else {
+      display = <div>
+                  <ul class="row justify-content-center" style={styles.ul}>{this.createMenuList()}</ul>
+                  <h5>Ingredient List</h5>
+                  <ul style={styles.ul}>{this.createIngredientList()}</ul>
+                </div>
+    }
     return (
-      <section>
+      <section class="mt-2 ml-4 mr-4">
         <h2>Menu</h2>
-        <ul>{this.createMenuList()}</ul>
-        <h5>Ingredient List</h5>
-        <ul>{this.createIngredientList()}</ul>
+        {display}
       </section>
     )
   }
 }
 
 export default MealList
+
+const styles = {
+  ul: {
+    listStyleType: 'none'
+  }
+}

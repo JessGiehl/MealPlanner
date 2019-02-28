@@ -1,12 +1,14 @@
 import React,{Component} from 'react';
 import Ingredient from './Ingredient';
+import {Button} from 'react-bootstrap';
 
 class RecipeDetail extends Component{
 
   state = {
     recipe : {
       ingredients : [],
-    }
+    },
+    "added" : false
   }
 
   //Make a API call when the component mounts
@@ -25,11 +27,13 @@ class RecipeDetail extends Component{
       })
       //create a recipe object containing two arrays, one for ingredients and one for flavors and push it to the state
       .then(function(myJson) {
-        console.log(myJson);
+        //remove any HTML tags and make each image secure
+        let cleanName = myJson.name.replace(/<\/?[^>]+(>|$)/g, "");
+        let secureImage = myJson.images[0].hostedLargeUrl.replace(/^http:\/\//i, 'https://');
         var recipe = {
-          "name" : myJson.name,
+          "name" : cleanName,
           "id" : recipeID,
-          "image" : myJson.images[0].hostedLargeUrl,
+          "image" : secureImage,
           "servings" : myJson.numberOfServings,
           "ingredients" : [],
           "flavors" : [],
@@ -38,9 +42,9 @@ class RecipeDetail extends Component{
         for (var i = 0; i < myJson.ingredientLines.length; i++) {
           recipe.ingredients.push(myJson.ingredientLines[i]);
         }
-        for (var i = 0; i < myJson.flavors.length; i++) {
-          recipe.flavors.push(myJson.flavors[i]);
-          console.log(myJson.flavors[i]);
+        for (var j = 0; j < myJson.flavors.length; j++) {
+          recipe.flavors.push(myJson.flavors[j]);
+          console.log(myJson.flavors[j]);
         }
         console.log(recipe);
         that.setState({"recipe":recipe});
@@ -58,21 +62,35 @@ class RecipeDetail extends Component{
       return ret;
   }
 
+  //toggles whether and item has been added to the menu so it can't be added twice
+  addItem(){
+    this.setState({"added" : true})
+    this.props.addItem(this.state.recipe)
+  }
+
     //render out the recipe details using the values we set in the state
     //use the method we passed down through props to call app.js' addItem method
     render(){
+
+      //create a variable for storing our button, once its clicked it will change to show the item has been added
+      let addButton;
+      if (!this.state.added) {
+        addButton = <Button onClick={() => this.addItem()}>Add to Menu</Button>
+      } else {
+        addButton =  <Button variant="success">Added to Menu</Button>
+      }
+
         return(
-          <section>
+          <section class="mt-2 ml-4 mr-4">
             <h2>{this.state.recipe.name}</h2>
             <img src={this.state.recipe.image} alt={this.state.recipe.name}></img>
             <p>Number of servings: {this.state.recipe.servings} </p>
-            <a href={this.state.recipe.externalURL}>Recipe Source</a>
+            <a href={this.state.recipe.externalURL} target="_blank">Recipe Source</a>
             <p>Ingredients:</p>
             <ul>
               {this.generateList()}
             </ul>
-            <Flavorchart flavors={this.state.recipe.flavors}/>
-            <button onClick={() => this.props.addItem(this.state.recipe)}>Add to Menu</button>
+            {addButton}
           </section>
         )
     }

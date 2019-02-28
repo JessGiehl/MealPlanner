@@ -17,7 +17,6 @@ class Searchbox extends Component {
   //when the form is submitted prevent the page from reloading and then use the props.history
   searchSubmit = e => {
     e.preventDefault();
-    console.log(this);
     this.props.history.push("/search/"+this.state.query);
   }
 
@@ -26,7 +25,7 @@ class Searchbox extends Component {
     return (
       <Form inline onSubmit={this.searchSubmit}>
         <FormControl type="text" placeholder="Search for recipes" className="mr-sm-2" value={this.state.query} onChange={this.handleChange}/>
-        <Button variant="outline-success" onClick={this.searchSubmit}>Search</Button>
+        <Button onClick={this.searchSubmit}>Search</Button>
       </Form>
     )
   }

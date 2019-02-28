@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import Searchbox from './search/Searchbox';
 import SearchItem from './search/SearchItem';
+import Background from '../images/splash.png'
 
 class HomePage extends Component{
 
@@ -24,16 +25,18 @@ class HomePage extends Component{
           return response.json();
         })
         .then(function(myJson) {
-          console.log(myJson);
 
           var responseObjects = [];
 
           //loop through the array of responses and create an object with the information for each one
           for (var i = 0; i < myJson.matches.length; i++) {
+            //remove any HTML tags and make each image secure
+            let cleanName = myJson.matches[i].recipeName.replace(/<\/?[^>]+(>|$)/g, "");
+            let secureImage = myJson.matches[i].imageUrlsBySize[90].replace(/^http:\/\//i, 'https://');
             responseObjects.push({
-              name : myJson.matches[i].recipeName,
+              name : cleanName,
               id : myJson.matches[i].id,
-              image : myJson.matches[i].imageUrlsBySize[90]
+              image : secureImage
             });
         }
         //set the state with our array of responseObjects
@@ -61,13 +64,17 @@ class HomePage extends Component{
     render(){
         return(
             <section>
-              <h2>Find Recipes</h2>
-              <h2>Plan Meals</h2>
-              <h2>Create Shopping Lists</h2>
-              <Searchbox />
-              <h5>or get started with these top rated recipes!</h5>
-              {/* call the generateList function and output it in an unordered list */}
-              <ul>{this.generateList()}</ul>
+              <div style={styles.bg} class="mb-2">
+                <h2>Find Recipes</h2>
+                <h2>Plan Meals</h2>
+                <h2>Create Shopping Lists</h2>
+                <Searchbox />
+              </div>
+              <div class="row justify-content-center">
+                <h5 class="justify-content-center">Or get started with these top rated recipes!</h5>
+                {/* call the generateList function and output it in an unordered list */}
+                <ul class="row justify-content-center" style={styles.ul}>{this.generateList()}</ul>
+              </div>
             </section>
         )
     }
@@ -75,3 +82,18 @@ class HomePage extends Component{
 }
 
 export default HomePage
+
+const styles = {
+  bg: {
+    height: '100%',
+    backgroundImage: 'url('+ Background +')',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    color: 'rgb(47, 47, 47)',
+    padding: '1rem'
+  },
+  ul: {
+    listStyleType: 'none'
+  }
+}

@@ -4,7 +4,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import SearchResults from './components/search/SearchResults';
 import RecipeDetail from './components/recipe/RecipeDetail';
-import Searchbox from './components/search/Searchbox';
 import MealList from './components/menu/MealList';
 import HomePage from './components/HomePage';
 

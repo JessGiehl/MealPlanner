@@ -12,11 +12,11 @@ export default Footer
 
 const styles = {
   footer: {
-    padding: '1px',
-    backgroundColor: 'rgba(9, 117, 33, 1)',
-    marginTop: '1rem'
+    padding: '1rem',
+    backgroundColor: 'rgba(247, 245, 245, 1)',
+    marginTop: '2rem'
   },
   h5: {
-    color: 'white'
+    color: 'rgb(74, 123, 255)'
   }
 }
