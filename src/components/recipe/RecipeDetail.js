@@ -81,11 +81,11 @@ class RecipeDetail extends Component{
       }
 
         return(
-          <section class="mt-2 ml-4 mr-4">
+          <section className="mt-2 ml-4 mr-4">
             <h2>{this.state.recipe.name}</h2>
             <img src={this.state.recipe.image} alt={this.state.recipe.name}></img>
             <p>Number of servings: {this.state.recipe.servings} </p>
-            <a href={this.state.recipe.externalURL} target="_blank">Recipe Source</a>
+            <a href={this.state.recipe.externalURL} target="_blank" rel="noopener noreferrer">Recipe Source</a>
             <p>Ingredients:</p>
             <ul>
               {this.generateList()}

@@ -70,10 +70,10 @@ class HomePage extends Component{
                 <h2>Create Shopping Lists</h2>
                 <Searchbox />
               </div>
-              <div class="row justify-content-center">
-                <h5 class="justify-content-center">Or get started with these top rated recipes!</h5>
+              <div className="row justify-content-center">
+                <h5 className="justify-content-center">Or get started with these top rated recipes!</h5>
                 {/* call the generateList function and output it in an unordered list */}
-                <ul class="row justify-content-center" style={styles.ul}>{this.generateList()}</ul>
+                <ul className="row justify-content-center" style={styles.ul}>{this.generateList()}</ul>
               </div>
             </section>
         )

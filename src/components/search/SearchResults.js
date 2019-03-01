@@ -77,11 +77,11 @@ class SearchResults extends Component{
       } else {
         data =  <div>
                   <h3>Search results for {this.state.searchQuery}:</h3>
-                  <ul style={styles.ul} class="row justify-content-center">{this.generateList()}</ul>
+                  <ul style={styles.ul} className="row justify-content-center">{this.generateList()}</ul>
                 </div>
       }
         return(
-            <section class="mt-2 ml-4 mr-4">
+            <section className="mt-2 ml-4 mr-4">
               {data}
             </section>
         )

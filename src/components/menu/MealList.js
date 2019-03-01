@@ -32,19 +32,19 @@ class MealList extends Component {
   render() {
     //if there are no recipes added to the menu, display a message prompting the user to search for recipes.
     let display;
-    if (this.props.menu[0].recipes == 0){
-      display = <div class="mb-20">
+    if (this.props.menu[0].recipes.length === 0){
+      display = <div className="mb-20">
                   <h5>Search for recipes and add them to your menu and they will appear here!</h5>
                 </div>
     } else {
       display = <div>
-                  <ul class="row justify-content-center" style={styles.ul}>{this.createMenuList()}</ul>
+                  <ul className="row justify-content-center" style={styles.ul}>{this.createMenuList()}</ul>
                   <h5>Ingredient List</h5>
                   <ul style={styles.ul}>{this.createIngredientList()}</ul>
                 </div>
     }
     return (
-      <section class="mt-2 ml-4 mr-4">
+      <section className="mt-2 ml-4 mr-4">
         <h2>Menu</h2>
         {display}
       </section>
