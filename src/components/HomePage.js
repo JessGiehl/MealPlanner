@@ -64,7 +64,7 @@ class HomePage extends Component{
     render(){
         return(
             <section>
-              <div style={styles.bg} class="mb-2">
+              <div style={styles.bg} className="mb-2">
                 <h2>Find Recipes</h2>
                 <h2>Plan Meals</h2>
                 <h2>Create Shopping Lists</h2>
