@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/MealPlanner/static/media/splash.ff400f48.png"
   },
   {
-    "revision": "c0d391a5d6ecfd435fc674a3378a7079",
+    "revision": "378ad883bf720a421ea15c9753c008e8",
     "url": "/MealPlanner/index.html"
   }
 ];
