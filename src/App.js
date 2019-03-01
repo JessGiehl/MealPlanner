@@ -31,7 +31,6 @@ class App extends Component {
 
   //method to delete a recipe from the state using the index from our menu list
   deleteItemAt(pIndex){
-    console.log("deleteItemAt",pIndex)
     //create a copy of the state array
     let menuArray = [...this.state.menus]
     let defaultMenu = menuArray[0];

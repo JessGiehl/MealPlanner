@@ -25,7 +25,7 @@ class MealList extends Component {
         tmp.push(rec.ingredients[j]);
       }
     }
-    return tmp.map((item,index)=>{ return <Ingredient name={item} />});
+    return tmp.map((item,index)=>{ return <Ingredient key={index} name={item} />});
   }
 
 

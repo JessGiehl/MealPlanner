@@ -18,7 +18,6 @@ class RecipeDetail extends Component{
     var urlStart = "https://api.yummly.com/v1/api/recipe/"
     const {recipeID} = this.props.match.params
     var urlEnd = "?_app_id=a18fce64&_app_key=a14d935b77f1742265befa9527b9232e";
-    console.log(recipeID);
 
     fetch(urlStart + recipeID + urlEnd)
       .then(function(response) {
@@ -53,7 +52,7 @@ class RecipeDetail extends Component{
   //loop through our ingredients in the state and return an ingredient component for each one
   generateList(){
       let ret = this.state.recipe.ingredients.map((e,i)=>{
-        return <Ingredient name={e} />
+        return <Ingredient key={i} name={e} />
       })
 
       return ret;
